@@ -7,6 +7,8 @@ import Select from '../../components/Select'
 
 import warningIcon from '../../assets/images/icons/warning.svg'
 
+import api from '../../services/api'
+
 import './styles.css'
 
 function TeacherForm() {
@@ -43,15 +45,19 @@ function TeacherForm() {
 
   function handleCreateClass(e: FormEvent) {
     e.preventDefault()
-    
-    console.log({
+
+    api.post('classes', {
       name,
       avatar,
       whatsapp,
       bio,
       subject,
-      cost,
-      scheduleItems
+      cost: Number(cost),
+      schedule: scheduleItems
+    }).then(() => {
+      alert('Cadastro realizado com sucesso!')
+    }).catch(() => {
+      alert('Erro no cadastro!')
     })
   }
 
@@ -107,6 +113,7 @@ function TeacherForm() {
                 { value: 'Ciências', label: 'Ciências'},
                 { value: 'Educação Física', label: 'Educação Física'},
                 { value: 'Física', label: 'Física'},
+                { value: 'Geografia', label: 'Geografia'},
                 { value: 'História', label: 'História'},
                 { value: 'Matemática', label: 'Matemática'},
                 { value: 'Português', label: 'Português'},
@@ -142,7 +149,7 @@ function TeacherForm() {
                       { value: '1', label: 'Segunda-feira' },
                       { value: '2', label: 'Terça-feira' },
                       { value: '3', label: 'Quarta-feira' },
-                      { value: '4', label: 'Quint-feira' },
+                      { value: '4', label: 'Quinta-feira' },
                       { value: '5', label: 'Sexta-feira' },
                       { value: '6', label: 'Sábado' }
                     ]}
