@@ -3,9 +3,9 @@ import db from '../database/connection'
 
 export default class ConnectionController {
   async index(request: Request, response: Response) {
-    const totalConnecrions = await db('connections').count('* as total')
+    const totalConnections = await db('connections').count('* as total')
 
-    const { total } = totalConnecrions[0]
+    const { total } = totalConnections[0]
 
     return response.json({ total })
   }
